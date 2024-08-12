@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from "react";
-import UserCard from "../components/UserCard";
-import NavBar from "../components/NavBar";
+import React from 'react';
+import NavBar from '../components/NavBar';
+import MovieCard from '../components/MovieCard';
 
-function Home() {
-  const [users, setUsers] = useState([]);
+const movies = [
+  // Add your movie objects here
+];
 
-  useEffect(() => {
-    fetch("http://localhost:4000/users")
-      .then((r) => r.json())
-      .then((data) => setUsers(data))
-      .catch((error) => console.error(error));
-  }, []);
-
-  const userList = users.map((user) => <UserCard key={user.id} user={user} />);
-
+const Home = () => {
   return (
-    <>
-      <header>
-        <NavBar />
-      </header>
-      <main>
-        <h1>Home!</h1>
-        {userList}
-      </main>
-    </>
+    <div>
+      <NavBar />
+      <h1>Home Page</h1>
+      <div className="movies-list">
+        {movies.map(movie => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+    </div>
   );
-}
+};
 
 export default Home;
